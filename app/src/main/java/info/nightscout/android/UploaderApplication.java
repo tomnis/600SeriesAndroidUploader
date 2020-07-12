@@ -1,11 +1,13 @@
 package info.nightscout.android;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
+import android.support.multidex.MultiDex;
 import android.util.Log;
 
 import com.bugfender.sdk.Bugfender;
@@ -55,6 +57,14 @@ public class UploaderApplication extends Application {
     private static ConnectivityManager connectivityManager;
 
     private static long startupRealtime;
+
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
+
 
     @Override
     public void onCreate() {
